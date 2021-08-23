@@ -1,14 +1,22 @@
-LDFLAGS = -L/usr/local/lib/pkgconfig `pkg-config --libs protobuf grpc++`\
-           -Wl,--no-as-needed -lgrpc++_reflection -Wl,--as-needed\
-           -ldl\
-		   -lpaho-mqttpp3 -lpaho-mqtt3as
-
-CXX = g++
-CPPFLAGS += `pkg-config --cflags protobuf grpc`
 CXXFLAGS += -std=c++11
 
+ifeq ($(SYSTEM),nadiros)
+LDFLAGS += -L/usr/local/lib `pkg-config --libs protobuf grpc++ `\
+	-ldl\
+		-lpaho-mqtt3c -lpaho-mqttpp3 -lpaho-mqtt3as 
+else
+LDFLAGS = -L/recipe-sysroot/usr/bin  `pkg-config --libs protobuf grpc++ `\
+           -Wl,--no-as-needed -lgrpc++_reflection -Wl,--as-needed\
+           -ldl\
+		   -lpaho-mqtt3c -lpaho-mqttpp3 -lpaho-mqtt3as 
+endif
+
+PROTOC = protoc
+CPPFLAGS += `pkg-config --cflags protobuf grpc`
+
+
 GRPC_CPP_PLUGIN = grpc_cpp_plugin
-GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
+GRPC_CPP_PLUGIN_PATH ?=/home/nadiros/yocto/poky/raspibuild/tmp/sysroots-components/x86_64/grpc-native/usr/bin/grpc_cpp_plugin
 
 all: client server
 
