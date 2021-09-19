@@ -161,8 +161,8 @@ The following commands build and locally install gRPC, Protocol Buffers, and Abs
     sudo apt-get install build-essential autoconf libtool pkg-config
     git clone https://github.com/grpc/grpc
     cd grpc
-    git submodule update --initcd
-    grpc/third_party/protobuf
+    git submodule update --init
+    cd third_party/protobuf
     sudo make install
 ```
 
