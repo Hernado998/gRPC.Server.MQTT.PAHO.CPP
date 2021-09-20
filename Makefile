@@ -16,7 +16,7 @@ CPPFLAGS += `pkg-config --cflags protobuf grpc`
 
 
 GRPC_CPP_PLUGIN = grpc_cpp_plugin
-GRPC_CPP_PLUGIN_PATH ?= ~/poky/rpibuild/tmp/work/x86_64/grpc-native/1.36.4-r0/build
+GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
 
 all: client server
 
