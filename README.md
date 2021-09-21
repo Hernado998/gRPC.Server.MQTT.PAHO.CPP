@@ -169,6 +169,7 @@ The following commands build and locally install gRPC, Protocol Buffers, and Abs
     make
     make check
     make install
+    sudo ldconfig
 ```
 
 **If you get this error "Package grpc was not found in the pkg-config search path.
@@ -177,7 +178,7 @@ to the PKG_CONFIG_PATH environment variable
 No package 'grpc' found
 " please write these lines.**
 ```css
-    put the following files in /usr/local/lib/pkgconfig : gpr.pc, grpc.pc, grpc++.pc, grpc++_unsecure.pc, grpc_unsecure.pc.
+    put the following files in /usr/local/lib/pkgconfig : gpr.pc, grpc.pc, grpc++.pc, grpc++_unsecure.pc, grpc_unsecure.pc
 ```
 
 *****************************************************************************************************************************************
