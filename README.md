@@ -96,7 +96,7 @@ To install the library to a non-standard location, use the CMAKE_INSTALL_PREFIX 
 **Setup**
 - Choose a directory to hold locally installed packages. This page assumes that the environment variable MY_INSTALL_DIR holds this directory path. For example:
 ```css
-    export MY_INSTALL_DIR=$HOME/.local
+    export MY_INSTALL_DIR=$HOME/local
 ```
 - Ensure that the directory exists:
 ```css
@@ -104,7 +104,7 @@ To install the library to a non-standard location, use the CMAKE_INSTALL_PREFIX 
 ```
 - Add the local bin folder to your path variable, for example:
 ```css
-    export PATH="$MY_INSTALL_DIR/bin:$PATH"
+    export PATH="$MY_INSTALL_DIR/local/bin:$PATH"
 ```
 **Install cmake**
 - You need version 3.13 or later of cmake. Install it by following these instructions:
@@ -156,27 +156,28 @@ The following commands build and locally install gRPC, Protocol Buffers, and Abs
     cd grpc/third_party/protobuf
     sudo make install
 ```
-**If the above method doesn't succed use this method to install gRPC**
+**use this method to continue installation of gRPC**
 ```css
     sudo apt-get install build-essential autoconf libtool pkg-config
-    git clone https://github.com/grpc/grpc
     cd grpc
     git submodule update --init
     cd third_party/protobuf
     sudo make install
-```
-
-**If you get this error "make: *** No targets specified and no makefile found. Stop." please write these lines.**
-```css
-    sudo apt-get build-dep program
+    cd third_party/protobuf
+    ./autogen.sh
     ./configure
-    sudo make install
+    make
+    make check
+    make install
 ```
 
-**Change owner when error permission denied occure**
+**If you get this error "Package grpc was not found in the pkg-config search path.
+Perhaps you should add the directory containing `grpc.pc'
+to the PKG_CONFIG_PATH environment variable
+No package 'grpc' found
+" please write these lines.**
 ```css
-    sudo chown [user] /usr/local/bin/protoc 
-    sudo chown -R [user] /usr/local/include/google
+    put the following files in /usr/local/lib/pkgconfig : gpr.pc, grpc.pc, grpc++.pc, grpc++_unsecure.pc, grpc_unsecure.pc.
 ```
 
 *****************************************************************************************************************************************
